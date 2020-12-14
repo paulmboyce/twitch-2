@@ -21,9 +21,9 @@ const Header = () => {
 			</Link>
 			<div className="right menu">
 				<div className="ui item">
-					<div className="ui primary button">
+					<div className="ui red button">
 						<Link style={{ color: "white" }} to="">
-							Login
+							Login with Google
 						</Link>
 					</div>
 				</div>
