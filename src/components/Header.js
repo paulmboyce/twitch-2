@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import GoogleAuthButton from "./GoogleAuthButton";
+
 const Header = () => {
 	return (
 		<div className="ui secondary pointing menu">
@@ -21,11 +23,7 @@ const Header = () => {
 			</Link>
 			<div className="right menu">
 				<div className="ui item">
-					<div className="ui red button">
-						<Link style={{ color: "white" }} to="">
-							Login with Google
-						</Link>
-					</div>
+					<GoogleAuthButton />
 				</div>
 			</div>
 			<hr />
