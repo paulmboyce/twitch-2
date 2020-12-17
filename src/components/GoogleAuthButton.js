@@ -56,28 +56,28 @@ const GoogleAuthButton = () => {
 	};
 
 	const onButtonClick = () => {
+		const signOut = () => {
+			_auth2.signOut().then(() => {
+				console.log("Logged Out OK");
+			});
+		};
+
+		const signIn = () => {
+			_auth2.signIn({ scope: "email" }).then(
+				(user) => {
+					console.log("Logged in OK: ", user);
+				},
+				(err) => {
+					console.log("Error: ", err);
+				}
+			);
+		};
+
 		if (isSignedIn) {
 			signOut();
 		} else {
 			signIn();
 		}
-	};
-
-	const signOut = () => {
-		_auth2.signOut().then(() => {
-			console.log("Logged Out OK");
-		});
-	};
-
-	const signIn = () => {
-		_auth2.signIn({ scope: "email" }).then(
-			(user) => {
-				console.log("Logged in OK: ", user);
-			},
-			(err) => {
-				console.log("Error: ", err);
-			}
-		);
 	};
 
 	return (
