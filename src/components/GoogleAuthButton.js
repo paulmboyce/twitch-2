@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { OAUTH_CLIENT_ID } from "../api/google/oauth";
+import userSignInAction from "../redux/compose/userSignInAction";
+import userSignOutAction from "../redux/compose/userSignOutAction";
 
-const GoogleAuthButton = () => {
+const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
 	const [_auth2, _setAuth2] = useState(null);
-	const [isUserSignedIn, setIsUserSignedIn] = useState(null);
 
 	useEffect(() => {
 		const initSigninV2 = function () {
@@ -29,7 +31,12 @@ const GoogleAuthButton = () => {
 	};
 
 	const onAuthChange = (isSignedIn) => {
-		setIsUserSignedIn(isSignedIn);
+		if (isSignedIn === true) {
+			dispatch(userSignInAction());
+		} else {
+			dispatch(userSignOutAction());
+		}
+
 		console.log("User is Signed In: ", isSignedIn);
 	};
 
@@ -66,4 +73,8 @@ const GoogleAuthButton = () => {
 		</div>
 	);
 };
-export default GoogleAuthButton;
+
+const mapStateToProps = (state) => {
+	return { isUserSignedIn: state.isUserSignedIn };
+};
+export default connect(mapStateToProps)(GoogleAuthButton);
