@@ -1,15 +1,12 @@
-const INITIAL_STATE = { isSignedIn: null };
+const INITIAL_STATE = { isUserSignedIn: null };
 
 const reduceSignedInUser = (oldState = INITIAL_STATE, { type }) => {
 	switch (type) {
 		case "USER_SIGNED_IN":
-			console.log("returning..", { ...oldState, isSignedIn: true });
-			return { ...oldState, isSignedIn: true };
+			return { ...oldState, isUserSignedIn: true };
 		case "USER_SIGNED_OUT":
-			console.log("returning..", { ...oldState, isSignedIn: false });
-			return { ...oldState, isSignedIn: false };
+			return { ...oldState, isUserSignedIn: false };
 		default:
-			console.log("Returning oldState...", oldState);
 			return oldState;
 	}
 };

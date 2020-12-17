@@ -75,7 +75,6 @@ const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
 };
 
 const mapStateToProps = (state) => {
-	console.log("STATE: ", state);
-	return { isUserSignedIn: state.userStatus.isSignedIn };
+	return { isUserSignedIn: state.userStatus.isUserSignedIn };
 };
 export default connect(mapStateToProps)(GoogleAuthButton);
