@@ -26,7 +26,6 @@ const Header = () => {
 					<GoogleAuthButton />
 				</div>
 			</div>
-			<hr />
 		</div>
 	);
 };

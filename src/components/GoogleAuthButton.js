@@ -46,23 +46,6 @@ const GoogleAuthButton = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [_gapi]);
 
-	const signIn = () => {
-		_auth2.signIn({ scope: "email" }).then(
-			(user) => {
-				console.log("Logged in OK: ", user);
-			},
-			(err) => {
-				console.log("Error: ", err);
-			}
-		);
-	};
-
-	const signOut = () => {
-		_auth2.signOut().then(() => {
-			console.log("Logged Out OK");
-		});
-	};
-
 	const initStatus = (isSignedIn) => {
 		onAuthChange(isSignedIn);
 	};
@@ -78,6 +61,23 @@ const GoogleAuthButton = () => {
 		} else {
 			signIn();
 		}
+	};
+
+	const signOut = () => {
+		_auth2.signOut().then(() => {
+			console.log("Logged Out OK");
+		});
+	};
+
+	const signIn = () => {
+		_auth2.signIn({ scope: "email" }).then(
+			(user) => {
+				console.log("Logged in OK: ", user);
+			},
+			(err) => {
+				console.log("Error: ", err);
+			}
+		);
 	};
 
 	return (
