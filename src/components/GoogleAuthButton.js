@@ -59,12 +59,7 @@ const GoogleAuthButton = () => {
 	};
 
 	return (
-		<div
-			className="ui red button"
-			onClick={() => {
-				onButtonClick();
-			}}
-		>
+		<div className="ui red button" onClick={onButtonClick}>
 			<Link style={{ color: "white" }} to="">
 				{isSignedIn ? "Log Out" : "Login with Google"}
 			</Link>
