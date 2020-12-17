@@ -5,7 +5,7 @@ import { OAUTH_CLIENT_ID } from "../api/google/oauth";
 
 const GoogleAuthButton = () => {
 	const [_auth2, _setAuth2] = useState(null);
-	const [isSignedIn, setIsSignedIn] = useState(null);
+	const [isUserSignedIn, setIsUserSignedIn] = useState(null);
 
 	useEffect(() => {
 		const initSigninV2 = function () {
@@ -29,7 +29,7 @@ const GoogleAuthButton = () => {
 	};
 
 	const onAuthChange = (isSignedIn) => {
-		setIsSignedIn(isSignedIn);
+		setIsUserSignedIn(isSignedIn);
 		console.log("User is Signed In: ", isSignedIn);
 	};
 
@@ -51,7 +51,7 @@ const GoogleAuthButton = () => {
 			);
 		};
 
-		if (isSignedIn) {
+		if (isUserSignedIn) {
 			signOut();
 		} else {
 			signIn();
@@ -61,7 +61,7 @@ const GoogleAuthButton = () => {
 	return (
 		<div className="ui red button" onClick={onButtonClick}>
 			<Link style={{ color: "white" }} to="">
-				{isSignedIn ? "Log Out" : "Login with Google"}
+				{isUserSignedIn ? "Log Out" : "Login with Google"}
 			</Link>
 		</div>
 	);
