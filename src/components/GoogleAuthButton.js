@@ -11,7 +11,7 @@ const GoogleAuthButton = () => {
 	useEffect(() => {
 		const setGapi = () => {
 			if (global.gapi) {
-				console.log("Setting GAPI...");
+				console.log("Setting _GAPI..");
 				_setGapi(global.gapi);
 			}
 		};
@@ -25,43 +25,39 @@ const GoogleAuthButton = () => {
 			setGapi();
 		} else {
 			console.log("Waiting for GAPI...");
-			const id = waitForGapi();
-			return () => {
-				console.log("Clearing timeput GAPI...");
-				window.clearTimeout(id);
-			};
+			waitForGapi();
 		}
 	}, []);
 
 	useEffect(() => {
+		const initSigninV2 = function () {
+			_gapi.auth2.init({ clientId: OAUTH_CLIENT_ID }).then((auth2) => {
+				console.log("GoogleAuth loaded OK");
+				auth2.isSignedIn.listen(onAuthChange);
+				initStatus(auth2.isSignedIn.get());
+				_setAuth2(auth2);
+			});
+		};
+
 		if (_gapi) {
-			console.log("GAPI initialised, loading AUTH2...", _gapi);
-			_gapi.load("auth2", initSigninV2);
-			console.log("client:auth2 requested...");
+			console.log("Loading AUTH2..");
+			_gapi.load("client:auth2", initSigninV2);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [_gapi]);
 
-	const initSigninV2 = function () {
-		_gapi.auth2.init({ clientId: OAUTH_CLIENT_ID }).then((auth2) => {
-			console.log("GoogleAuth loaded..OK");
-			_setAuth2(auth2);
-			auth2.isSignedIn.listen(onAuthChange);
-			initStatus(auth2.isSignedIn.get());
-		});
-	};
-
-	const onClickLogIn = () => {
+	const signIn = () => {
 		_auth2.signIn({ scope: "email" }).then(
 			(user) => {
 				console.log("Logged in OK: ", user);
 			},
-			function rejected(err) {
+			(err) => {
 				console.log("Error: ", err);
 			}
 		);
 	};
 
-	const onClickLogOut = () => {
+	const signOut = () => {
 		_auth2.signOut().then(() => {
 			console.log("Logged Out OK");
 		});
@@ -73,27 +69,25 @@ const GoogleAuthButton = () => {
 
 	const onAuthChange = (isSignedIn) => {
 		setIsSignedIn(isSignedIn);
-		console.log("onAuthChange(): >> isSignedIn", isSignedIn);
+		console.log("User is Signed In: ", isSignedIn);
 	};
 
-	const authorize = (e) => {
-		console.log("clicked!!", e.target.text);
-
+	const onButtonClick = () => {
 		if (isSignedIn) {
-			onClickLogOut();
+			signOut();
 		} else {
-			onClickLogIn();
+			signIn();
 		}
 	};
 
 	return (
 		<div
 			className="ui red button"
-			onClick={(e) => {
-				authorize(e);
+			onClick={() => {
+				onButtonClick();
 			}}
 		>
-			<Link style={{ color: "white" }}>
+			<Link style={{ color: "white" }} to="">
 				{isSignedIn ? "Log Out" : "Login with Google"}
 			</Link>
 		</div>
