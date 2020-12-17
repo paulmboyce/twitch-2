@@ -7,7 +7,7 @@ import App from "./components/App";
 import reduceSignedInUser from "./redux/reduce/reduceSignedInUser";
 const store = createStore(
 	combineReducers({
-		isUserSignedIn: reduceSignedInUser,
+		userStatus: reduceSignedInUser,
 	})
 );
 

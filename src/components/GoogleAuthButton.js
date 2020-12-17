@@ -31,7 +31,7 @@ const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
 	};
 
 	const onAuthChange = (isSignedIn) => {
-		if (isSignedIn === true) {
+		if (isSignedIn) {
 			dispatch(userSignInAction());
 		} else {
 			dispatch(userSignOutAction());
@@ -75,6 +75,7 @@ const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
 };
 
 const mapStateToProps = (state) => {
-	return { isUserSignedIn: state.isUserSignedIn };
+	console.log("STATE: ", state);
+	return { isUserSignedIn: state.userStatus.isSignedIn };
 };
 export default connect(mapStateToProps)(GoogleAuthButton);
