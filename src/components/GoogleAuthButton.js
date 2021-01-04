@@ -33,7 +33,6 @@ const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
 				.getAuthInstance()
 				.currentUser.get()
 				.getId();
-			console.log("USER ID: ", userId);
 			dispatch(userSignInAction(userId));
 		} else {
 			dispatch(userSignOutAction());
