@@ -1,6 +1,8 @@
+import { USER_SIGNED_IN } from "../types";
+
 const userSignInAction = () => {
 	return {
-		type: "USER_SIGNED_IN",
+		type: USER_SIGNED_IN,
 	};
 };
 
