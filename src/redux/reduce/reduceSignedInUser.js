@@ -11,7 +11,7 @@ const reduceSignedInUser = (oldState = INITIAL_STATE, action) => {
 				userId: action.payload.userId,
 			};
 		case USER_SIGNED_OUT:
-			return { ...oldState, isUserSignedIn: false };
+			return { ...oldState, isUserSignedIn: false, userId: null };
 		default:
 			return oldState;
 	}
