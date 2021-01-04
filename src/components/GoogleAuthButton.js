@@ -29,7 +29,10 @@ const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
 
 	const onAuthChange = (isSignedIn) => {
 		if (isSignedIn) {
-			const userId = global.gapi.auth2.getAuthInstance().currentUser.get().Ca;
+			const userId = global.gapi.auth2
+				.getAuthInstance()
+				.currentUser.get()
+				.getId();
 			console.log("USER ID: ", userId);
 			dispatch(userSignInAction(userId));
 		} else {
