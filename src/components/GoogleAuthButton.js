@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -7,15 +7,12 @@ import userSignInAction from "../redux/compose/userSignInAction";
 import userSignOutAction from "../redux/compose/userSignOutAction";
 
 const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
-	const [_auth2, _setAuth2] = useState(null);
-
 	useEffect(() => {
 		const initSigninV2 = function () {
 			global.gapi.auth2.init({ clientId: OAUTH_CLIENT_ID }).then((auth2) => {
 				console.log("GoogleAuth loaded OK");
 				auth2.isSignedIn.listen(onAuthChange);
 				initStatus(auth2.isSignedIn.get());
-				_setAuth2(auth2);
 			});
 		};
 
@@ -42,20 +39,26 @@ const GoogleAuthButton = ({ dispatch, isUserSignedIn }) => {
 
 	const onButtonClick = () => {
 		const signOut = () => {
-			_auth2.signOut().then(() => {
-				console.log("Logged Out OK");
-			});
+			global.gapi.auth2
+				.getAuthInstance()
+				.signOut()
+				.then(() => {
+					console.log("Logged Out OK");
+				});
 		};
 
 		const signIn = () => {
-			_auth2.signIn({ scope: "email" }).then(
-				(user) => {
-					console.log("Logged in OK: ", user);
-				},
-				(err) => {
-					console.log("Error: ", err);
-				}
-			);
+			global.gapi.auth2
+				.getAuthInstance()
+				.signIn({ scope: "email" })
+				.then(
+					(user) => {
+						console.log("Logged in OK: ", user);
+					},
+					(err) => {
+						console.log("Error: ", err);
+					}
+				);
 		};
 
 		if (isUserSignedIn) {
