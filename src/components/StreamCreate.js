@@ -1,10 +1,11 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
-
+import { useHistory } from "react-router-dom";
 import { restApi } from "../api/axios/axios";
 
-const StreamCreate = (props) => {
-	console.log("PROPS: history", props.history);
+const StreamCreate = ({ handleSubmit }) => {
+	const history = useHistory();
+
 	const renderError = ({ touched, error }) => {
 		if (touched && error) {
 			return <span style={{ color: "red" }}>{error}</span>;
@@ -24,14 +25,14 @@ const StreamCreate = (props) => {
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
 		restApi.post("/", formValues).then(() => {
-			props.history.push("/");
+			history.push("/");
 		});
 	};
 
 	return (
 		<div>
 			<h1>StreamCreate</h1>
-			<form className="ui form" onSubmit={props.handleSubmit(onSubmit)}>
+			<form className="ui form" onSubmit={handleSubmit(onSubmit)}>
 				<Field component={renderInput} name="title" label="title" />
 				<Field component={renderInput} name="desc" label="description" />
 				<button className="ui button blue" type="submit">
