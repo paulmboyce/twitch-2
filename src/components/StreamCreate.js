@@ -3,24 +3,24 @@ import { reduxForm, Field } from "redux-form";
 import { useHistory } from "react-router-dom";
 import { restApi } from "../api/axios/axios";
 
+const renderInput = ({ input, meta, label }) => {
+	return (
+		<div className="field">
+			<label>{label}</label>
+			<input type="text" {...input} autoComplete="off" />
+			{renderError(meta)}
+		</div>
+	);
+};
+
+const renderError = ({ touched, error }) => {
+	if (touched && error) {
+		return <span style={{ color: "red" }}>{error}</span>;
+	}
+};
+
 const StreamCreate = ({ handleSubmit }) => {
 	const history = useHistory();
-
-	const renderError = ({ touched, error }) => {
-		if (touched && error) {
-			return <span style={{ color: "red" }}>{error}</span>;
-		}
-	};
-
-	const renderInput = ({ input, meta, label }) => {
-		return (
-			<div className="field">
-				<label>{label}</label>
-				<input type="text" {...input} autoComplete="off" />
-				{renderError(meta)}
-			</div>
-		);
-	};
 
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
