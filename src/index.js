@@ -7,10 +7,13 @@ import { reducer as formReducer } from "redux-form";
 
 import App from "./components/App";
 import reduceSignedInUser from "./redux/reduce/reduceSignedInUser";
+import reduceStreams from "./redux/reduce/reduceStreams";
+
 const store = createStore(
 	combineReducers({
 		auth: reduceSignedInUser,
 		form: formReducer,
+		streams: reduceStreams,
 	}),
 	composeWithDevTools()
 );

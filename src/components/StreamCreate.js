@@ -2,6 +2,9 @@ import React from "react";
 import { reduxForm, Field } from "redux-form";
 import { useHistory } from "react-router-dom";
 import { restApi } from "../api/axios/axios";
+import { connect } from "react-redux";
+
+import addStreamAction from "../redux/compose/addStreamAction";
 
 const renderInput = ({ input, meta, label }) => {
 	return (
@@ -19,12 +22,14 @@ const renderError = ({ touched, error }) => {
 	}
 };
 
-const StreamCreate = ({ handleSubmit }) => {
+const StreamCreate = ({ handleSubmit, dispatch }) => {
 	const history = useHistory();
 
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
-		restApi.post("/", formValues).then(() => {
+		restApi.post("/", formValues).then(({ data }) => {
+			console.log("DATA: ", data);
+			dispatch(addStreamAction(data));
 			history.push("/");
 		});
 	};
@@ -54,4 +59,6 @@ const validate = (formValues) => {
 	return errors;
 };
 
-export default reduxForm({ form: "StreamCreate", validate })(StreamCreate);
+export default connect()(
+	reduxForm({ form: "StreamCreate", validate })(StreamCreate)
+);
