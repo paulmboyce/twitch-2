@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
+import thunk from "redux-thunk";
 
 import App from "./components/App";
 import reduceSignedInUser from "./redux/reduce/reduceSignedInUser";
@@ -15,7 +16,7 @@ const store = createStore(
 		form: formReducer,
 		streams: reduceStreams,
 	}),
-	composeWithDevTools()
+	composeWithDevTools(applyMiddleware(thunk))
 );
 
 ReactDOM.render(
