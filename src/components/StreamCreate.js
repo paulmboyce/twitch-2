@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { useHistory } from "react-router-dom";
-import { restApi } from "../api/axios/axios";
 
 import addStreamAction from "../redux/compose/addStreamAction";
 
@@ -27,11 +26,8 @@ const StreamCreate = ({ handleSubmit, dispatch }) => {
 
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
-		restApi.post("/", formValues).then(({ data }) => {
-			console.log("DATA: ", data);
-			dispatch(addStreamAction(data));
-			history.push("/");
-		});
+		dispatch(addStreamAction(formValues));
+		history.push("/");
 	};
 
 	return (
