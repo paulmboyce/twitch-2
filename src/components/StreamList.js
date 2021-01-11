@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import deleteStreamAction from "../redux/compose/deleteStreamAction";
 const byIdDesc = (a, b) => b.id - a.id;
 
-const StreamList = ({ streams }) => {
+const StreamList = ({ dispatch, streams }) => {
+	const handleDeleteStream = (id) => {
+		dispatch(deleteStreamAction(id));
+	};
+
 	const renderStreams = () => {
 		return streams.sort(byIdDesc).map(({ id, title, desc }) => {
 			return (
@@ -14,9 +19,16 @@ const StreamList = ({ streams }) => {
 					</div>
 					<div className="extra content">
 						<div className="ui three buttons">
-							<div className="ui  green button">Watch</div>
+							<div className="ui green button">Watch</div>
 							<div className="ui basic blue button">Edit</div>
-							<div className="ui basic red button">Delete</div>
+							<div
+								className="ui basic red button"
+								onClick={() => {
+									handleDeleteStream(id);
+								}}
+							>
+								Delete
+							</div>
 						</div>
 					</div>
 				</div>
