@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-
-import getStreamsAction from "../redux/compose/getStreamsAction";
 
 const byIdDesc = (a, b) => b.id - a.id;
 
-const StreamList = ({ dispatch, streams }) => {
-	useEffect(() => {
-		dispatch(getStreamsAction());
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
+const StreamList = ({ streams }) => {
 	const renderStreams = () => {
 		return streams.sort(byIdDesc).map(({ id, title, desc }) => {
 			return (

@@ -1,8 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { useHistory } from "react-router-dom";
 import { restApi } from "../api/axios/axios";
-import { connect } from "react-redux";
 
 import addStreamAction from "../redux/compose/addStreamAction";
 
