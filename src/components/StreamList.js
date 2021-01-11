@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-import { restApi } from "../api/axios/axios";
+import getStreamsAction from "../redux/compose/getStreamsAction";
 
 const byIdDesc = (a, b) => b.id - a.id;
 
-const StreamList = () => {
-	const [streams, setStreams] = useState([]);
+const StreamList = ({ dispatch, streams }) => {
 	useEffect(() => {
-		restApi.get("/").then(({ data }) => {
-			setStreams(data);
-		});
+		dispatch(getStreamsAction());
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const renderStreams = () => {
@@ -31,4 +30,8 @@ const StreamList = () => {
 	);
 };
 
-export default StreamList;
+const mapStateToProps = (state) => {
+	return { streams: state.streams };
+};
+
+export default connect(mapStateToProps)(StreamList);
