@@ -10,7 +10,8 @@ const StreamList = ({ dispatch, streams }) => {
 	};
 
 	const renderStreams = () => {
-		return streams.sort(byIdDesc).map(({ id, title, desc }) => {
+		const streamValues = Object.values(streams);
+		return streamValues.sort(byIdDesc).map(({ id, title, desc }) => {
 			return (
 				<div key={id} className="card">
 					<div className="content">
