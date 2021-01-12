@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { useHistory } from "react-router-dom";
 
-import addStreamAction from "../redux/compose/addStreamAction";
+import createStreamAction from "../redux/compose/createStreamAction";
 
 const renderInput = ({ input, meta, label }) => {
 	return (
@@ -26,7 +26,7 @@ const StreamCreate = ({ handleSubmit, dispatch }) => {
 
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
-		dispatch(addStreamAction(formValues));
+		dispatch(createStreamAction(formValues));
 		history.push("/");
 	};
 

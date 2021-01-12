@@ -1,7 +1,7 @@
 import { CREATE_STREAM } from "../types";
 import { restApi } from "../../api/axios/axios";
 
-const addStreamAction = (formValues) => {
+const createStreamAction = (formValues) => {
 	return (dispatch) => {
 		restApi.post("/", formValues).then(({ data }) => {
 			dispatch({
@@ -12,4 +12,4 @@ const addStreamAction = (formValues) => {
 	};
 };
 
-export default addStreamAction;
+export default createStreamAction;
