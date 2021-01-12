@@ -8,7 +8,11 @@ const reduceStreams = (oldStreams = {}, { type, payload }) => {
 			return { ...oldStreams, [payload.stream.id]: payload.stream };
 
 		case GET_STREAMS:
-			return { ...payload.streams };
+			const streams = {};
+			payload.streams.forEach((stream) => {
+				streams[stream.id] = stream;
+			});
+			return streams;
 
 		case DELETE_STREAM:
 			return _.omit(oldStreams, [payload.streamId]);
