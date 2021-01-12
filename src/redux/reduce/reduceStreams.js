@@ -1,4 +1,4 @@
-import { CREATE_STREAM, GET_STREAMS, DELETE_STREAM } from "../types";
+import { CREATE_STREAM, GET_STREAMS, DELETE_STREAM } from "../actionTypes";
 
 const reduceStreams = (oldStreams = [], { type, payload }) => {
 	switch (type) {
@@ -9,7 +9,6 @@ const reduceStreams = (oldStreams = [], { type, payload }) => {
 			return [...payload.streams];
 
 		case DELETE_STREAM:
-			console.log(DELETE_STREAM, payload);
 			return oldStreams.filter((stream) => {
 				return stream.id !== payload.streamId;
 			});

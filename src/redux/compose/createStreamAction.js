@@ -1,4 +1,4 @@
-import { CREATE_STREAM } from "../types";
+import { CREATE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 
 const createStreamAction = (formValues) => {

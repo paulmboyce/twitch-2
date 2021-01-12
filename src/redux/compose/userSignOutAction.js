@@ -1,4 +1,4 @@
-import { USER_SIGNED_OUT } from "../types";
+import { USER_SIGNED_OUT } from "../actionTypes";
 
 const userSignOutAction = () => {
 	return {

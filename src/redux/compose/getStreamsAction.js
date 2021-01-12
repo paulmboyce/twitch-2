@@ -1,5 +1,5 @@
 import { restApi } from "../../api/axios/axios";
-import { GET_STREAMS } from "../types";
+import { GET_STREAMS } from "../actionTypes";
 
 const getStreamsAction = () => {
 	return (dispatch) => {

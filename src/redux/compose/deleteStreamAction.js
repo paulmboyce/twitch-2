@@ -1,4 +1,4 @@
-import { DELETE_STREAM } from "../types";
+import { DELETE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 const deleteStreamAction = (streamId) => {
 	console.log("delete stream actions", streamId);
