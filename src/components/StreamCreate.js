@@ -55,6 +55,9 @@ const validate = (formValues) => {
 	return errors;
 };
 
-export default connect()(
-	reduxForm({ form: "StreamCreate", validate })(StreamCreate)
-);
+const reduxFormStreamCreate = reduxForm({
+	form: "StreamCreate",
+	validate: validate,
+})(StreamCreate);
+
+export default connect()(reduxFormStreamCreate);
