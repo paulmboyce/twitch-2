@@ -1,12 +1,11 @@
-import { ADD_STREAM } from "../types";
+import { CREATE_STREAM } from "../types";
 import { restApi } from "../../api/axios/axios";
 
 const addStreamAction = (formValues) => {
 	return (dispatch) => {
 		restApi.post("/", formValues).then(({ data }) => {
-			console.log("DATA: ", data);
 			dispatch({
-				type: ADD_STREAM,
+				type: CREATE_STREAM,
 				payload: { stream: data },
 			});
 		});

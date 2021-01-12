@@ -1,8 +1,8 @@
-import { ADD_STREAM, GET_STREAMS, DELETE_STREAM } from "../types";
+import { CREATE_STREAM, GET_STREAMS, DELETE_STREAM } from "../types";
 
 const reduceStreams = (oldStreams = [], { type, payload }) => {
 	switch (type) {
-		case ADD_STREAM:
+		case CREATE_STREAM:
 			return [...oldStreams, payload.stream];
 
 		case GET_STREAMS:
