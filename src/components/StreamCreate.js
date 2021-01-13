@@ -21,11 +21,12 @@ const renderError = ({ touched, error }) => {
 	}
 };
 
-const StreamCreate = ({ handleSubmit, dispatch }) => {
+const StreamCreate = ({ handleSubmit, dispatch, userId }) => {
 	const history = useHistory();
 
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
+		formValues["owner"] = userId;
 		dispatch(createStreamAction(formValues));
 		history.push("/");
 	};
@@ -60,4 +61,7 @@ const reduxFormStreamCreate = reduxForm({
 	validate: validate,
 })(StreamCreate);
 
-export default connect()(reduxFormStreamCreate);
+const mapStateToProps = (state) => {
+	return { userId: state.auth.userId };
+};
+export default connect(mapStateToProps)(reduxFormStreamCreate);

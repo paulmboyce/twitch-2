@@ -1,9 +1,9 @@
 import { CREATE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 
-const createStreamAction = (formValues) => {
+const createStreamAction = (streamValues) => {
 	return (dispatch) => {
-		restApi.post("/", formValues).then(({ data }) => {
+		restApi.post("/", streamValues).then(({ data }) => {
 			dispatch({
 				type: CREATE_STREAM,
 				payload: { stream: data },

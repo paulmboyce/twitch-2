@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
 const byIdDesc = (a, b) => b.id - a.id;
 
-const StreamList = ({ dispatch, streams }) => {
+const StreamList = ({ dispatch, streams, userId }) => {
 	const handleDeleteStream = (id) => {
 		dispatch(deleteStreamAction(id));
 	};
 
 	const renderStreams = () => {
-		return streams.sort(byIdDesc).map(({ id, title, desc }) => {
+		return streams.sort(byIdDesc).map(({ id, title, desc, owner }) => {
 			return (
 				<div key={id} className="item">
 					<div className="content">
@@ -18,23 +18,27 @@ const StreamList = ({ dispatch, streams }) => {
 							<i className="large middle aligned icon camera"></i>
 							{title}
 						</div>
-						<div className="description">{desc}</div>
+						<div className="description">
+							<p style={{ color: "grey" }}> Created: {owner}</p> {desc}
+						</div>
 						<div className="extra">
-							<div className="ui right floated">
-								<div className="ui green button">
-									Watch Now
-									<i className="right chevron icon"></i>
-								</div>
-								<div className="ui basic blue button">Edit</div>
-								<div
-									className="ui basic red button"
-									onClick={() => {
-										handleDeleteStream(id);
-									}}
-								>
-									X
-								</div>
+							<div className="ui green button">
+								Watch Now
+								<i className="right chevron icon"></i>
 							</div>
+							{userId === owner && (
+								<React.Fragment>
+									<div
+										className="ui right floated basic button"
+										onClick={() => {
+											handleDeleteStream(id);
+										}}
+									>
+										X
+									</div>
+									<div className="ui right floated basic blue button">Edit</div>
+								</React.Fragment>
+							)}
 						</div>
 					</div>
 				</div>
@@ -54,6 +58,7 @@ const mapStateToProps = (state) => {
 	return {
 		// NOTE: Map obj collection to array, so render code is clean.
 		streams: Object.values(state.streams),
+		userId: state.auth.userId,
 	};
 };
 
