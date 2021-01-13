@@ -1,4 +1,4 @@
-import _ from "lodash";
+import omit from "lodash.omit";
 
 import { CREATE_STREAM, GET_STREAMS, DELETE_STREAM } from "../actionTypes";
 
@@ -15,7 +15,7 @@ const reduceStreams = (oldStreams = {}, { type, payload }) => {
 			return streams;
 
 		case DELETE_STREAM:
-			return _.omit(oldStreams, [payload.streamId]);
+			return omit(oldStreams, [payload.streamId]);
 
 		default:
 			return oldStreams;
