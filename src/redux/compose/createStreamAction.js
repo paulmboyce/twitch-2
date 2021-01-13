@@ -5,7 +5,7 @@ const createStreamAction = (formValues) => {
 	return (dispatch, getState) => {
 		const { auth } = getState();
 		restApi
-			.post("/", { ...formValues, owner: auth.userId })
+			.post("/", { ...formValues, ownerId: auth.userId })
 			.then(({ data }) => {
 				dispatch({
 					type: CREATE_STREAM,

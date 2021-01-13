@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
 const byIdDesc = (a, b) => b.id - a.id;
 
-const StreamList = ({ dispatch, streams, userId }) => {
+const StreamList = ({ dispatch, streams, currentUserId }) => {
 	const handleDeleteStream = (id) => {
 		dispatch(deleteStreamAction(id));
 	};
 
 	const renderStreams = () => {
-		return streams.sort(byIdDesc).map(({ id, title, desc, owner }) => {
+		return streams.sort(byIdDesc).map(({ id, title, desc, ownerId }) => {
 			return (
 				<div key={id} className="item">
 					<div className="content">
@@ -19,14 +19,14 @@ const StreamList = ({ dispatch, streams, userId }) => {
 							{title}
 						</div>
 						<div className="description">
-							<p style={{ color: "grey" }}> Created: {owner}</p> {desc}
+							<p style={{ color: "grey" }}> Created: {ownerId}</p> {desc}
 						</div>
 						<div className="extra">
 							<div className="ui green button">
 								Watch Now
 								<i className="right chevron icon"></i>
 							</div>
-							{userId === owner && (
+							{currentUserId === ownerId && (
 								<React.Fragment>
 									<div
 										className="ui right floated basic button"
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => {
 	return {
 		// NOTE: Map obj collection to array, so render code is clean.
 		streams: Object.values(state.streams),
-		userId: state.auth.userId,
+		currentUserId: state.auth.userId,
 	};
 };
 
