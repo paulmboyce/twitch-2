@@ -9,7 +9,9 @@ const reduceStreams = (oldStreams = {}, { type, payload }) => {
 			return { ...oldStreams, [payload.stream.id]: payload.stream };
 
 		case GET_STREAMS:
-			return mapKeys(payload.streams, "id");
+			// Bulletproof by merging onto oldStreams (even though the
+			// payload SHOULD be the complete streams data set).
+			return { ...oldStreams, ...mapKeys(payload.streams, "id") };
 
 		case DELETE_STREAM:
 			return omit(oldStreams, [payload.streamId]);
