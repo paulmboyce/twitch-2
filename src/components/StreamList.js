@@ -10,8 +10,7 @@ const StreamList = ({ dispatch, streams }) => {
 	};
 
 	const renderStreams = () => {
-		const streamValues = Object.values(streams);
-		return streamValues.sort(byIdDesc).map(({ id, title, desc }) => {
+		return streams.sort(byIdDesc).map(({ id, title, desc }) => {
 			return (
 				<div key={id} className="card">
 					<div className="content">
@@ -46,7 +45,10 @@ const StreamList = ({ dispatch, streams }) => {
 };
 
 const mapStateToProps = (state) => {
-	return { streams: state.streams };
+	return {
+		// NOTE: Map obj collection to array, so render code is clean.
+		streams: Object.values(state.streams),
+	};
 };
 
 export default connect(mapStateToProps)(StreamList);
