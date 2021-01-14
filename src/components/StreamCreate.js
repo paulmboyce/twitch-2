@@ -36,12 +36,12 @@ const StreamCreate = ({ handleSubmit, dispatch }) => {
 			<form className="ui form" onSubmit={handleSubmit(onSubmit)}>
 				<Field component={renderInput} name="title" label="title" />
 				<Field component={renderInput} name="desc" label="description" />
-				<Link className="ui button grey " to="/">
-					Cancel
-				</Link>
-				<button className="ui button blue" type="submit">
+				<button className="ui  right floated button blue" type="submit">
 					Save
 				</button>
+				<Link className="ui right floated button grey" to="/">
+					Cancel
+				</Link>
 			</form>
 		</div>
 	);
