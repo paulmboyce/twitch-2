@@ -28,6 +28,16 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 		}
 	};
 
+	const renderCreateButton = () => {
+		if (currentUserId) {
+			return (
+				<Link className="item" to="/streams/new">
+					<button className="ui button primary">Create Stream</button>
+				</Link>
+			);
+		}
+	};
+
 	const renderStreams = () => {
 		return streams.sort(byIdDesc).map(({ id, title, desc, ownerId }) => {
 			return (
@@ -56,9 +66,7 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 	return (
 		<div>
 			<h1>Streams</h1>
-			<Link className="item" to="/streams/new">
-				<button className="ui button primary">Create Stream</button>
-			</Link>
+			{renderCreateButton()}
 			<hr />
 			<div className="ui divided items">{renderStreams()}</div>
 		</div>
