@@ -9,6 +9,24 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 		dispatch(deleteStreamAction(id));
 	};
 
+	const renderEditDelete = (streamId, ownerId) => {
+		return (
+			currentUserId === ownerId && (
+				<React.Fragment>
+					<div
+						className="ui right floated basic button"
+						onClick={() => {
+							handleDeleteStream(streamId);
+						}}
+					>
+						X
+					</div>
+					<div className="ui right floated basic blue button">Edit</div>
+				</React.Fragment>
+			)
+		);
+	};
+
 	const renderStreams = () => {
 		return streams.sort(byIdDesc).map(({ id, title, desc, ownerId }) => {
 			return (
@@ -26,19 +44,7 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 								Watch Now
 								<i className="right chevron icon"></i>
 							</div>
-							{currentUserId === ownerId && (
-								<React.Fragment>
-									<div
-										className="ui right floated basic button"
-										onClick={() => {
-											handleDeleteStream(id);
-										}}
-									>
-										X
-									</div>
-									<div className="ui right floated basic blue button">Edit</div>
-								</React.Fragment>
-							)}
+							{renderEditDelete(id, ownerId)}
 						</div>
 					</div>
 				</div>
