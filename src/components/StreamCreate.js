@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import createStreamAction from "../redux/compose/createStreamAction";
 
@@ -36,6 +36,9 @@ const StreamCreate = ({ handleSubmit, dispatch }) => {
 			<form className="ui form" onSubmit={handleSubmit(onSubmit)}>
 				<Field component={renderInput} name="title" label="title" />
 				<Field component={renderInput} name="desc" label="description" />
+				<Link className="ui button grey " to="/">
+					Cancel
+				</Link>
 				<button className="ui button blue" type="submit">
 					Save
 				</button>

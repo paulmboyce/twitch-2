@@ -7,7 +7,7 @@ const Header = () => {
 	return (
 		<div className="ui secondary pointing menu">
 			<Link className="item " to="/">
-				List Streams
+				Home
 			</Link>
 			<Link className="item" to="/streams/edit">
 				Edit a Stream
