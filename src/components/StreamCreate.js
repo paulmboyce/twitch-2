@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import createStreamAction from "../redux/compose/createStreamAction";
 
@@ -22,11 +22,9 @@ const renderError = ({ touched, error }) => {
 };
 
 const StreamCreate = ({ handleSubmit, dispatch }) => {
-	const history = useHistory();
-
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
-		dispatch(createStreamAction(formValues, history));
+		dispatch(createStreamAction(formValues));
 	};
 
 	return (

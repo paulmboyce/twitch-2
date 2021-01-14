@@ -1,8 +1,8 @@
 import { CREATE_STREAM, ERROR } from "../actionTypes";
-
 import { restApi } from "../../api/axios/axios";
+import history from "../../history";
 
-const createStreamAction = (formValues, history) => {
+const createStreamAction = (formValues) => {
 	return (dispatch, getState) => {
 		const { auth } = getState();
 		restApi

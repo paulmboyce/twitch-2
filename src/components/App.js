@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Header from "../components/Header";
-import { MemoryRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
 import StreamList from "../components/StreamList";
@@ -10,6 +10,7 @@ import StreamDelete from "../components/StreamDelete";
 import StreamShow from "../components/StreamShow";
 import getStreamsAction from "../redux/compose/getStreamsAction";
 import ErrorHeader from "../components/ErrorHeader";
+import history from "../history";
 
 const App = ({ dispatch }) => {
 	useEffect(() => {
@@ -19,7 +20,7 @@ const App = ({ dispatch }) => {
 
 	return (
 		<div className="ui container">
-			<Router>
+			<Router history={history}>
 				<div>
 					<Header />
 					<ErrorHeader />
