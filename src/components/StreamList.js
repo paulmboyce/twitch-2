@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
 const byIdDesc = (a, b) => b.id - a.id;
@@ -10,8 +11,8 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 	};
 
 	const renderEditDelete = (streamId, ownerId) => {
-		return (
-			currentUserId === ownerId && (
+		if (currentUserId === ownerId) {
+			return (
 				<React.Fragment>
 					<div
 						className="ui right floated basic button"
@@ -23,8 +24,8 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 					</div>
 					<div className="ui right floated basic blue button">Edit</div>
 				</React.Fragment>
-			)
-		);
+			);
+		}
 	};
 
 	const renderStreams = () => {
@@ -55,6 +56,10 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 	return (
 		<div>
 			<h1>Streams</h1>
+			<Link className="item" to="/streams/new">
+				<button className="ui button primary">Create Stream</button>
+			</Link>
+			<hr />
 			<div className="ui divided items">{renderStreams()}</div>
 		</div>
 	);

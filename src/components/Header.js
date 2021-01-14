@@ -9,9 +9,6 @@ const Header = () => {
 			<Link className="item " to="/">
 				List Streams
 			</Link>
-			<Link className="item" to="/streams/new">
-				Add a Stream
-			</Link>
 			<Link className="item" to="/streams/edit">
 				Edit a Stream
 			</Link>
