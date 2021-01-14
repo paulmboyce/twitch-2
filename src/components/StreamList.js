@@ -31,9 +31,11 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 	const renderCreateButton = () => {
 		if (currentUserId) {
 			return (
-				<Link className="ui button primary" to="/streams/new">
-					Create Stream
-				</Link>
+				<div style={{ textAlign: "right" }}>
+					<Link className="ui button primary" to="/streams/new">
+						Create Stream
+					</Link>
+				</div>
 			);
 		}
 	};
