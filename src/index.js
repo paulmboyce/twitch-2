@@ -9,12 +9,13 @@ import thunk from "redux-thunk";
 import App from "./components/App";
 import reduceSignedInUser from "./redux/reduce/reduceSignedInUser";
 import reduceStreams from "./redux/reduce/reduceStreams";
-
+import reduceErrors from "./redux/reduce/reduceErrors";
 const store = createStore(
 	combineReducers({
 		auth: reduceSignedInUser,
 		form: formReducer,
 		streams: reduceStreams,
+		error: reduceErrors,
 	}),
 	composeWithDevTools(applyMiddleware(thunk))
 );

@@ -26,8 +26,7 @@ const StreamCreate = ({ handleSubmit, dispatch }) => {
 
 	const onSubmit = (formValues) => {
 		console.log("onSubmit! FORM DATA: ", formValues);
-		dispatch(createStreamAction(formValues));
-		history.push("/");
+		dispatch(createStreamAction(formValues, history));
 	};
 
 	return (

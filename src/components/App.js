@@ -9,6 +9,7 @@ import StreamEdit from "../components/StreamEdit";
 import StreamDelete from "../components/StreamDelete";
 import StreamShow from "../components/StreamShow";
 import getStreamsAction from "../redux/compose/getStreamsAction";
+import ErrorHeader from "../components/ErrorHeader";
 
 const App = ({ dispatch }) => {
 	useEffect(() => {
@@ -21,6 +22,7 @@ const App = ({ dispatch }) => {
 			<Router>
 				<div>
 					<Header />
+					<ErrorHeader />
 					<Route path="/" exact component={StreamList} />
 					<Route path="/streams/new" component={StreamCreate} />
 					<Route path="/streams/edit" component={StreamEdit} />
