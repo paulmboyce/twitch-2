@@ -14,10 +14,16 @@ import history from "../history";
 
 const App = ({ dispatch }) => {
 	useEffect(() => {
+		defaultToHomePage();
 		dispatch(getStreamsAction());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const defaultToHomePage = () => {
+		if (history.location.pathname !== "/") {
+			history.push("/");
+		}
+	};
 	return (
 		<div className="ui container">
 			<Router history={history}>

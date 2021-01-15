@@ -3,11 +3,19 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
+import editStreamAction from "../redux/compose/editStreamAction";
+
 const byIdDesc = (a, b) => b.id - a.id;
 
 const StreamList = ({ dispatch, streams, currentUserId }) => {
-	const handleDeleteStream = (id) => {
-		dispatch(deleteStreamAction(id));
+	console.log(".... render: STREAMLIST");
+
+	const handleDeleteStream = (streamId) => {
+		dispatch(deleteStreamAction(streamId));
+	};
+
+	const handleEditStream = (streamId) => {
+		dispatch(editStreamAction(streamId));
 	};
 
 	const renderEditDelete = (streamId, ownerId) => {
@@ -22,7 +30,12 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 					>
 						X
 					</div>
-					<div className="ui right floated basic blue button">Edit</div>
+					<div
+						className="ui right floated basic blue button"
+						onClick={() => handleEditStream(streamId)}
+					>
+						Edit
+					</div>
 				</React.Fragment>
 			);
 		}
