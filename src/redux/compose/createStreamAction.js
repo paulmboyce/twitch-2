@@ -1,6 +1,7 @@
-import { CREATE_STREAM, ERROR } from "../actionTypes";
+import { CREATE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 import history from "../../history";
+import throwErrorToState from "../../error";
 
 const createStreamAction = (formValues) => {
 	return (dispatch, getState) => {
@@ -14,12 +15,8 @@ const createStreamAction = (formValues) => {
 					payload: { stream: data },
 				});
 			})
-			.catch((error) => {
-				dispatch({
-					type: ERROR,
-					payload: { error: error },
-				});
-				console.log("ERROR in createStreamAction(): ", error);
+			.catch((err) => {
+				dispatch(throwErrorToState(err));
 			});
 	};
 };

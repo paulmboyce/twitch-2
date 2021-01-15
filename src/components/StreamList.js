@@ -8,8 +8,6 @@ import editStreamAction from "../redux/compose/editStreamAction";
 const byIdDesc = (a, b) => b.id - a.id;
 
 const StreamList = ({ dispatch, streams, currentUserId }) => {
-	console.log(".... render: STREAMLIST");
-
 	const handleDeleteStream = (streamId) => {
 		dispatch(deleteStreamAction(streamId));
 	};
