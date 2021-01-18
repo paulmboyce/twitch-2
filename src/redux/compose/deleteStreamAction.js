@@ -1,6 +1,6 @@
 import { DELETE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
-import throwErrorToState from "./catchErrorAction";
+import catchErrorAction from "./catchErrorAction";
 
 const deleteStreamAction = (streamId) => {
 	console.log("delete stream actions", streamId);
@@ -14,7 +14,7 @@ const deleteStreamAction = (streamId) => {
 				});
 			})
 			.catch((err) => {
-				dispatch(throwErrorToState(err));
+				dispatch(catchErrorAction(err));
 			});
 	};
 };

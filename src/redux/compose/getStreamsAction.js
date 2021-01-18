@@ -1,7 +1,7 @@
 import { restApi } from "../../api/axios/axios";
 import { GET_STREAMS } from "../actionTypes";
 
-import throwErrorToState from "./catchErrorAction";
+import catchErrorAction from "./catchErrorAction";
 
 const getStreamsAction = () => {
 	return (dispatch) => {
@@ -14,7 +14,7 @@ const getStreamsAction = () => {
 				});
 			})
 			.catch((err) => {
-				dispatch(throwErrorToState(err));
+				dispatch(catchErrorAction(err));
 			});
 	};
 };

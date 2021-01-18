@@ -1,7 +1,7 @@
 import { UPDATE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 import history from "../../history";
-import throwErrorToState from "./catchErrorAction";
+import catchErrorAction from "./catchErrorAction";
 
 const updateStreamAction = (formValues) => {
 	return (dispatch) => {
@@ -12,7 +12,7 @@ const updateStreamAction = (formValues) => {
 				history.push("/");
 			})
 			.catch((err) => {
-				dispatch(throwErrorToState(err));
+				dispatch(catchErrorAction(err));
 			});
 	};
 };

@@ -1,7 +1,7 @@
 import { CREATE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 import history from "../../history";
-import throwErrorToState from "./catchErrorAction";
+import catchErrorAction from "./catchErrorAction";
 
 const createStreamAction = (formValues) => {
 	return (dispatch, getState) => {
@@ -16,7 +16,7 @@ const createStreamAction = (formValues) => {
 				});
 			})
 			.catch((err) => {
-				dispatch(throwErrorToState(err));
+				dispatch(catchErrorAction(err));
 			});
 	};
 };

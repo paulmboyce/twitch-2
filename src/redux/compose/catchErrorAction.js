@@ -1,6 +1,6 @@
 import { ERROR } from "../actionTypes";
 
-const throwErrorToState = (error) => {
+const catchErrorAction = (error) => {
 	console.log(error);
 	return {
 		type: ERROR,
@@ -8,4 +8,4 @@ const throwErrorToState = (error) => {
 	};
 };
 
-export default throwErrorToState;
+export default catchErrorAction;

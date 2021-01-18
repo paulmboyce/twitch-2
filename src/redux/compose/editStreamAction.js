@@ -1,7 +1,7 @@
 import { EDIT_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 import history from "../../history";
-import throwErrorToState from "./catchErrorAction";
+import catchErrorAction from "./catchErrorAction";
 
 const editStreamAction = (streamId) => {
 	return (dispatch) => {
@@ -15,7 +15,7 @@ const editStreamAction = (streamId) => {
 				history.push("/streams/edit");
 			})
 			.catch((err) => {
-				dispatch(throwErrorToState(err));
+				dispatch(catchErrorAction(err));
 			});
 	};
 };
