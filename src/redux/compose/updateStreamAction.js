@@ -1,7 +1,7 @@
 import { UPDATE_STREAM } from "../actionTypes";
 import { restApi } from "../../api/axios/axios";
 import history from "../../history";
-import throwErrorToState from "../../error";
+import throwErrorToState from "./catchErrorAction";
 
 const updateStreamAction = (formValues) => {
 	return (dispatch) => {

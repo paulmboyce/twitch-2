@@ -1,4 +1,4 @@
-import { ERROR } from "./redux/actionTypes";
+import { ERROR } from "../actionTypes";
 
 const throwErrorToState = (error) => {
 	console.log(error);
