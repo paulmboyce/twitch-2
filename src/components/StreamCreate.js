@@ -8,8 +8,8 @@ import createStreamAction from "../redux/compose/createStreamAction";
 const renderInput = ({ input, meta, label }) => {
 	return (
 		<div className="field">
-			<label>{label}</label>
-			<input type="text" {...input} autoComplete="off" />
+			<label htmlFor={input.name}>{label}</label>
+			<input id={input.name} type="text" {...input} autoComplete="off" />
 			{renderError(meta)}
 		</div>
 	);
@@ -23,7 +23,6 @@ const renderError = ({ touched, error }) => {
 
 const StreamCreate = ({ handleSubmit, dispatch }) => {
 	const onSubmit = (formValues) => {
-		console.log("onSubmit! FORM DATA: ", formValues);
 		dispatch(createStreamAction(formValues));
 	};
 
