@@ -9,7 +9,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import configureMockStore from "redux-mock-store";
-import { createMemoryHistory as mockHistory } from "history";
+import { createBrowserHistory as mockHistory } from "history";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
@@ -27,6 +27,7 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 	};
 
 	let mockStore;
+	let history = mockHistory();
 
 	const mockThunkDispatcher = jest.fn((action) => {
 		console.log("DISPATCHNG: ", action);
@@ -69,7 +70,7 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 
 		render(
 			<Provider store={mockStore}>
-				<Router history={mockHistory()}>
+				<Router history={history}>
 					<StreamCreate />
 				</Router>
 			</Provider>
@@ -77,7 +78,8 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 	});
 
 	it("dispatches 'CREATE_STREAM' action on SAVE button click", async () => {
-		expect(screen.getByText(/save/i)).toBeInTheDocument();
+		history.push("/ANY_NOT_HOME");
+		await waitFor(() => expect(document.location.pathname).not.toEqual("/"));
 
 		//ARR
 		const titleInput = screen.getByLabelText(/title/i);
@@ -86,7 +88,9 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 		fireEvent.change(descriptionInput, {
 			target: { value: TEST_STREAM.desc },
 		});
+
 		//ACT
+		expect(screen.getByText(/save/i)).toBeInTheDocument();
 		const leftClick = { button: 0 };
 		userEvent.click(screen.getByText(/save/i), leftClick);
 
@@ -100,6 +104,7 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 			},
 		};
 		expect(mockThunkDispatcher).toHaveBeenCalledWith(expectedAction);
+		expect(document.location.pathname).toEqual("/");
 	});
 
 	it("navigates on CANCEL button click", () => {});
