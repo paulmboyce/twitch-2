@@ -29,7 +29,8 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"test:watch": "npm test -- --watchAll"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -52,6 +53,7 @@
 	"devDependencies": {
 		"commitizen": "^4.2.2",
 		"husky": "^4.3.5",
+		"msw": "^0.25.0",
 		"redux-mock-store": "^1.5.4"
 	}
 }
