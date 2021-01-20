@@ -91,8 +91,8 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 
 		//ACT
 		expect(screen.getByText(/save/i)).toBeInTheDocument();
-		const leftClick = { button: 0 };
-		userEvent.click(screen.getByText(/save/i), leftClick);
+		const saveButton = screen.getByRole("button", { name: /^SAVE$/i });
+		userEvent.click(saveButton);
 
 		//ASS (wait for server call (POST) to complete)
 		await waitFor(() => expect(mockThunkDispatcher).toHaveBeenCalledTimes(1));
@@ -107,9 +107,16 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 		expect(document.location.pathname).toEqual("/");
 	});
 
-	it("navigates on CANCEL button click", () => {});
+	it("navigates HOME on CANCEL button click", async () => {
+		//ARR
+		mockHistory.push("/NOT_HOME");
+		expect(document.location.pathname).toEqual("/NOT_HOME");
 
-	it("warns if a title is not entered, on SAVE button click", () => {
-		//		fail();
+		//ACT
+		const cancelButton = screen.getByRole("button", { name: /^CANCEL$/i });
+		userEvent.click(cancelButton);
+
+		//ASS
+		expect(document.location.pathname).toEqual("/");
 	});
 });

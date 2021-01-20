@@ -35,7 +35,7 @@ const StreamCreate = ({ handleSubmit, dispatch }) => {
 				<button className="ui  right floated button blue" type="submit">
 					Save
 				</button>
-				<Link className="ui right floated button grey" to="/">
+				<Link role="button" className="ui right floated button grey" to="/">
 					Cancel
 				</Link>
 			</form>
