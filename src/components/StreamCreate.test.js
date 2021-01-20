@@ -9,7 +9,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import configureMockStore from "redux-mock-store";
-import { createBrowserHistory as mockHistory } from "history";
+import { createBrowserHistory } from "history";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
@@ -27,7 +27,7 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 	};
 
 	let mockStore;
-	let history = mockHistory();
+	let mockHistory = createBrowserHistory();
 
 	const mockThunkDispatcher = jest.fn((action) => {
 		console.log("DISPATCHNG: ", action);
@@ -70,7 +70,7 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 
 		render(
 			<Provider store={mockStore}>
-				<Router history={history}>
+				<Router history={mockHistory}>
 					<StreamCreate />
 				</Router>
 			</Provider>
@@ -78,7 +78,7 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 	});
 
 	it("dispatches 'CREATE_STREAM' action on SAVE button click", async () => {
-		history.push("/ANY_NOT_HOME");
+		mockHistory.push("/ANY_NOT_HOME");
 		await waitFor(() => expect(document.location.pathname).not.toEqual("/"));
 
 		//ARR
@@ -108,4 +108,8 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 	});
 
 	it("navigates on CANCEL button click", () => {});
+
+	it("warns if a title is not entered, on SAVE button click", () => {
+		//		fail();
+	});
 });
