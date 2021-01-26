@@ -14,16 +14,10 @@ import history from "../history";
 
 const App = ({ dispatch }) => {
 	useEffect(() => {
-		defaultToHomePage();
 		dispatch(getStreamsAction());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const defaultToHomePage = () => {
-		if (history.location.pathname !== "/") {
-			history.push("/");
-		}
-	};
 	return (
 		<div className="ui container">
 			<Router history={history}>
@@ -32,7 +26,7 @@ const App = ({ dispatch }) => {
 					<ErrorHeader />
 					<Route path="/" exact component={StreamList} />
 					<Route path="/streams/new" component={StreamCreate} />
-					<Route path="/streams/edit" component={StreamEdit} />
+					<Route path="/streams/edit/:streamId" component={StreamEdit} />
 					<Route path="/streams/delete" component={StreamDelete} />
 					<Route path="/streams/show" component={StreamShow} />
 				</div>

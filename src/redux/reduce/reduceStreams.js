@@ -4,6 +4,7 @@ import mapKeys from "lodash.mapkeys";
 import {
 	CREATE_STREAM,
 	UPDATE_STREAM,
+	GET_STREAM,
 	GET_STREAMS,
 	DELETE_STREAM,
 } from "../actionTypes";
@@ -14,6 +15,9 @@ const reduceStreams = (oldStreams = {}, { type, payload }) => {
 			return { ...oldStreams, [payload.stream.id]: payload.stream };
 
 		case UPDATE_STREAM:
+			return { ...oldStreams, [payload.stream.id]: payload.stream };
+
+		case GET_STREAM:
 			return { ...oldStreams, [payload.stream.id]: payload.stream };
 
 		case GET_STREAMS:

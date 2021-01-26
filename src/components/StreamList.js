@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
-import editStreamAction from "../redux/compose/editStreamAction";
+import history from "../history";
 
 const byIdDesc = (a, b) => b.id - a.id;
 
@@ -12,28 +12,24 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 		dispatch(deleteStreamAction(streamId));
 	};
 
-	const handleEditStream = (streamId) => {
-		dispatch(editStreamAction(streamId));
-	};
-
 	const renderEditDelete = (streamId, ownerId) => {
 		if (currentUserId === ownerId) {
 			return (
 				<React.Fragment>
 					<div
-						className="ui right floated basic button"
-						onClick={() => {
-							handleDeleteStream(streamId);
-						}}
+						role="button"
+						className="ui right floated basic blue button"
+						onClick={() => handleDeleteStream(streamId)}
 					>
 						X
 					</div>
-					<div
-						className="ui right floated basic blue button"
-						onClick={() => handleEditStream(streamId)}
+					<Link
+						role="button"
+						to={`/streams/edit/${streamId}`}
+						className="ui right floated basic button"
 					>
 						Edit
-					</div>
+					</Link>
 				</React.Fragment>
 			);
 		}

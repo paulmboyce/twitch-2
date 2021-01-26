@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import updateStreamAction from "../redux/compose/updateStreamAction";
-
+import getStreamAction from "../redux/compose/getStreamsAction";
 const validate = ({ title, desc }) => {
 	const errors = {};
 
@@ -19,18 +19,29 @@ const validate = ({ title, desc }) => {
 const renderInput = ({ input, label, meta: { touched, error } }) => {
 	return (
 		<div className="field">
-			<label>{label}</label>
-			<input {...input} />
+			<label htmlFor={input.name}>{label}</label>
+			<input id={input.name} {...input} />
 			{touched && error && <span style={{ color: "red" }}>{error}</span>}
 		</div>
 	);
 };
 
-const StreamEdit = ({ dispatch, initialValues, handleSubmit }) => {
+const StreamEdit = ({ dispatch, match, initialValues, handleSubmit }) => {
+	useEffect(() => {
+		if (!initialValues) {
+			dispatch(getStreamAction(match.params.streamId));
+		}
+	}, []);
+
 	const onSubmit = (formValues) => {
 		console.log("SUBMIT", formValues);
 		dispatch(updateStreamAction(formValues));
 	};
+
+	console.log("initialValues: ", initialValues);
+	if (!initialValues) {
+		return <div>Loading...</div>;
+	}
 	return (
 		<div>
 			<h1>StreamEdit: {initialValues.desc}</h1>
@@ -60,9 +71,9 @@ const formStreamEdit = reduxForm({
 	validate: validate,
 })(StreamEdit);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, { match }) => {
 	return {
-		initialValues: state.activeStream,
+		initialValues: state.streams[match.params.streamId],
 	};
 };
 export default connect(mapStateToProps)(formStreamEdit);
