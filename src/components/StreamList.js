@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
-import history from "../history";
 
 const byIdDesc = (a, b) => b.id - a.id;
 

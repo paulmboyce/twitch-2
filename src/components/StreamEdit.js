@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import updateStreamAction from "../redux/compose/updateStreamAction";
-import getStreamAction from "../redux/compose/getStreamsAction";
+import getStreamAction from "../redux/compose/getStreamAction";
 const validate = ({ title, desc }) => {
 	const errors = {};
 
