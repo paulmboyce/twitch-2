@@ -1,3 +1,4 @@
+import pick from "lodash.pick";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import updateStreamAction from "../redux/compose/updateStreamAction";
@@ -5,15 +6,15 @@ import getStreamAction from "../redux/compose/getStreamAction";
 import StreamForm from "./StreamForm";
 
 const StreamEdit = ({ dispatch, match, initialValues }) => {
+	const { streamId } = match.params;
 	useEffect(() => {
 		if (!initialValues) {
-			dispatch(getStreamAction(match.params.streamId));
+			dispatch(getStreamAction(streamId));
 		}
 	}, []);
 
 	const onSubmit = (formValues) => {
-		console.log("SUBMIT", formValues);
-		dispatch(updateStreamAction(formValues));
+		dispatch(updateStreamAction(streamId, formValues));
 	};
 
 	console.log("initialValues: ", initialValues);
@@ -23,7 +24,10 @@ const StreamEdit = ({ dispatch, match, initialValues }) => {
 	return (
 		<div>
 			<h1>StreamEdit:</h1>
-			<StreamForm onSubmit={onSubmit} initialValues={initialValues} />
+			<StreamForm
+				onSubmit={onSubmit}
+				initialValues={pick(initialValues, "title", "desc")}
+			/>
 		</div>
 	);
 };
