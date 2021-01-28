@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./AbstractModal.css"
+import "./AbstractModal.css";
 
 // Let's create a Modal component that is an abstraction around
 // the portal API.
-const modalRoot = document.getElementById("modal-root");
 
 class AbstractModal extends React.Component {
 	constructor(props) {
@@ -12,18 +11,19 @@ class AbstractModal extends React.Component {
 		// Create a div that we'll render the modal into. Because each
 		// Modal component has its own element, we can render multiple
 		// modal components into the modal container.
+		this.modalRoot = document.getElementById("modal-root");
 		this.el = document.createElement("div");
 	}
 
 	componentDidMount() {
 		// Append the element into the DOM on mount. We'll render
-		// into the modal container element (see the HTML tab).
-		modalRoot.appendChild(this.el);
+		// into the modal container element.
+		this.modalRoot.appendChild(this.el);
 	}
 
 	componentWillUnmount() {
 		// Remove the element from the DOM when we unmount
-		modalRoot.removeChild(this.el);
+		this.modalRoot.removeChild(this.el);
 	}
 
 	render() {
@@ -31,7 +31,7 @@ class AbstractModal extends React.Component {
 		return ReactDOM.createPortal(
 			// Any valid React child: JSX, strings, arrays, etc.
 			this.props.children,
-			// A DOM element
+			// This DOM element is our modal container
 			this.el
 		);
 	}

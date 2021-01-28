@@ -8,7 +8,7 @@ import "./Modal.css";
 class Modal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { showModal: false };
+		this.state = { showModal: props.show || true };
 
 		this.handleShow = this.handleShow.bind(this);
 		this.handleHide = this.handleHide.bind(this);
@@ -39,7 +39,7 @@ class Modal extends React.Component {
 	}
 
 	render() {
-		const { message, okLabel, cancelLabel } = this.props;
+		const { title, okLabel, cancelLabel } = this.props;
 
 		// Show a Modal on click.
 		// (In a real app, don't forget to use ARIA attributes
@@ -54,12 +54,13 @@ class Modal extends React.Component {
 							e.stopPropagation();
 						}}
 					>
-						<div className="ui  header">
-							{message ? message : "Want to proceed?"}
+						<div className="ui header">
+							{title ? title : "Want to proceed?"}
 						</div>
 						<div className="inline">
 							<br />
 							<div
+								role="button"
 								className="ui button"
 								onClick={(e) => {
 									this.handleClickCancel(e);
@@ -68,6 +69,7 @@ class Modal extends React.Component {
 								{cancelLabel ? cancelLabel : "CANCEL"}
 							</div>
 							<div
+								role="button"
 								className="ui primary button"
 								onClick={(e) => {
 									this.handleClickOk(e);
@@ -81,13 +83,7 @@ class Modal extends React.Component {
 			</AbstractModal>
 		) : null;
 
-		return (
-			<div className="app">
-				This div has overflow: hidden.
-				<button onClick={this.handleShow}>Show modal</button>
-				{modal}
-			</div>
-		);
+		return <div>{modal}</div>;
 	}
 }
 
