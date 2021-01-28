@@ -11,6 +11,7 @@ const StreamEdit = ({ dispatch, match, initialValues }) => {
 		if (!initialValues) {
 			dispatch(getStreamAction(streamId));
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const onSubmit = (formValues) => {
