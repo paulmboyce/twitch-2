@@ -8,8 +8,7 @@ import "./Modal.css";
 class Modal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { showModal: props.show || true };
-
+		this.state = { showModal: props.show === false ? false : true };
 		this.handleShow = this.handleShow.bind(this);
 		this.handleHide = this.handleHide.bind(this);
 	}
@@ -46,8 +45,15 @@ class Modal extends React.Component {
 		// for accessibility!)
 		const modal = this.state.showModal ? (
 			<AbstractModal>
-				<div className="modal" onClick={this.handleHide}>
+				<div
+					data-testid="id-modal-container"
+					className="modal"
+					onClick={() => {
+						this.handleClickCancel();
+					}}
+				>
 					<div
+						data-testid="id-modal-centre"
 						className="ui placeholder segment"
 						style={{ minWidth: "50%", textAlign: "center" }}
 						onClick={(e) => {

@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
-
+import history from "../history";
 const byIdDesc = (a, b) => b.id - a.id;
 
 const StreamList = ({ dispatch, streams, currentUserId }) => {
 	const handleDeleteStream = (streamId) => {
-		dispatch(deleteStreamAction(streamId));
+		history.push(`/streams/delete/${streamId}`);
 	};
 
 	const renderEditDelete = (streamId, ownerId) => {

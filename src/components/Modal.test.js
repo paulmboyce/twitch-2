@@ -26,6 +26,47 @@ describe("Test Modal:", () => {
 		expect(found).toBeInTheDocument();
 	});
 
+	it("can disable auto show on render", () => {
+		//ARR
+		const title = "some random title only for this modal";
+		const rxExactModalTitle = new RegExp(`^${title}$`);
+		const notFound = screen.queryByText(rxExactModalTitle);
+		expect(notFound).not.toBeInTheDocument();
+
+		//ACT
+		render(<Modal title={title} show={false} />);
+
+		//ASS
+		const found = screen.queryByText(rxExactModalTitle);
+		expect(found).not.toBeInTheDocument();
+	});
+
+	it("closes when click on the background", () => {
+		// ARR
+		render(<Modal />);
+
+		//ACT
+		let background = screen.getByTestId("id-modal-container");
+		fireEvent.click(background);
+
+		//ASS
+		background = screen.queryByTestId("id-modal-container");
+		expect(background).not.toBeInTheDocument();
+	});
+
+	it("stays open when click on the central form", () => {
+		// ARR
+		render(<Modal />);
+
+		//ACT
+		let centre = screen.getByTestId("id-modal-centre");
+		fireEvent.click(centre);
+
+		//ASS
+		centre = screen.queryByTestId("id-modal-centre");
+		expect(centre).toBeInTheDocument();
+	});
+
 	it("renders a default Title", () => {
 		//ACT
 		render(<Modal />);

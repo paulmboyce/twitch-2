@@ -3,7 +3,6 @@ import { restApi } from "../../api/axios/axios";
 import catchErrorAction from "./catchErrorAction";
 
 const deleteStreamAction = (streamId) => {
-	console.log("delete stream actions", streamId);
 	return (dispatch) => {
 		restApi
 			.delete(`/${streamId}`)

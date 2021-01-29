@@ -11,7 +11,6 @@ import StreamShow from "../components/StreamShow";
 import getStreamsAction from "../redux/compose/getStreamsAction";
 import ErrorHeader from "../components/ErrorHeader";
 import history from "../history";
-import Modal from "./Modal";
 
 const App = ({ dispatch }) => {
 	useEffect(() => {
@@ -25,18 +24,11 @@ const App = ({ dispatch }) => {
 				<div>
 					<Header />
 					<ErrorHeader />
-					<Modal
-						onClickOk={() => {
-							console.log("OK!");
-						}}
-						okLabel="Delete"
-						cancelLabel="Cancel"
-						message="Want to delete this stream?"
-					/>
+
 					<Route path="/" exact component={StreamList} />
 					<Route path="/streams/new" component={StreamCreate} />
 					<Route path="/streams/edit/:streamId" component={StreamEdit} />
-					<Route path="/streams/delete" component={StreamDelete} />
+					<Route path="/streams/delete/:streamId" component={StreamDelete} />
 					<Route path="/streams/show" component={StreamShow} />
 				</div>
 			</Router>

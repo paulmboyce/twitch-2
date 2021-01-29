@@ -1,11 +1,33 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const StreamDelete = () => {
+import Modal from "./Modal";
+import deleteStreamAction from "../redux/compose/deleteStreamAction";
+import history from "../history";
+
+const StreamDelete = ({ dispatch, match }) => {
+	const onClickModalOk = () => {
+		const { streamId } = match.params;
+		console.log("OK! Deleting stream ", streamId);
+		dispatch(deleteStreamAction(streamId));
+		history.push("/");
+	};
+
+	const onClickModalCancel = () => {
+		history.push("/");
+	};
 	return (
 		<div>
 			<h1>StreamDelete</h1>
+			<Modal
+				onClickOk={onClickModalOk}
+				onClickCancel={onClickModalCancel}
+				okLabel="DELETE"
+				cancelLabel="NO"
+				title="Want to delete this stream?"
+			/>
 		</div>
 	);
 };
 
-export default StreamDelete;
+export default connect()(StreamDelete);
