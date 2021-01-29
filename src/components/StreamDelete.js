@@ -8,7 +8,6 @@ import history from "../history";
 const StreamDelete = ({ dispatch, match }) => {
 	const onClickModalOk = () => {
 		const { streamId } = match.params;
-		console.log("OK! Deleting stream ", streamId);
 		dispatch(deleteStreamAction(streamId));
 		history.push("/");
 	};

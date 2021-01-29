@@ -8,7 +8,7 @@ import "./Modal.css";
 class Modal extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { showModal: props.show === false ? false : true };
+		this.state = { showModal: true };
 		this.handleShow = this.handleShow.bind(this);
 		this.handleHide = this.handleHide.bind(this);
 	}
