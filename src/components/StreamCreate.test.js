@@ -50,10 +50,6 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 	beforeEach(() => {
 		mockStore = configureMockStore([thunk])(TEST_STATE);
 
-		const mockGetState = jest.fn(() => {
-			return mockStore.getState();
-		});
-
 		const ignoreReduxFormAction = (action) => {
 			if (action.type && action.type.includes("@@redux-form")) {
 				return;
@@ -64,7 +60,7 @@ describe("Test StreamCreate (with mock Redux & bypassed redux-form", () => {
 			ignoreReduxFormAction(action);
 
 			if (typeof action === "function") {
-				action(mockThunkDispatcher, mockGetState);
+				action(mockThunkDispatcher, mockStore.getState);
 			}
 		});
 
