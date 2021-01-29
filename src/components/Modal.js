@@ -1,55 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import AbstractModal from "./AbstractModal";
 import "./Modal.css";
 
 // The Modal component is a normal React component, so we can
 // render it wherever we like without needing to know that it's
 // implemented with portals.
-class Modal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { showModal: true };
-		this.handleShow = this.handleShow.bind(this);
-		this.handleHide = this.handleHide.bind(this);
+const Modal = ({ onClickOk, onClickCancel, title, okLabel, cancelLabel }) => {
+	const [showModal, setShowModal] = useState(true);
+
+	function handleHide() {
+		setShowModal(false);
 	}
 
-	handleShow() {
-		this.setState({ showModal: true });
-	}
-
-	handleHide() {
-		this.setState({ showModal: false });
-	}
-
-	handleClickOk() {
-		if (typeof this.props.onClickOk !== "function") {
+	function handleClickOk() {
+		if (typeof onClickOk !== "function") {
 			return console.log("No onClickOk() function configured.");
 		}
-		this.props.onClickOk();
+		onClickOk();
 	}
 
-	handleClickCancel() {
-		if (typeof this.props.onClickCancel !== "function") {
-			console.log("No onClickCancel() prop. Using default behaviour.");
-			this.handleHide();
+	function handleClickCancel() {
+		if (typeof onClickCancel !== "function") {
+			handleHide();
 			return;
 		}
-		this.props.onClickCancel();
+		onClickCancel();
 	}
 
-	render() {
-		const { title, okLabel, cancelLabel } = this.props;
-
-		// Show a Modal on click.
-		// (In a real app, don't forget to use ARIA attributes
-		// for accessibility!)
-		const modal = this.state.showModal ? (
+	function renderModal() {
+		return (
 			<AbstractModal>
 				<div
 					data-testid="id-modal-container"
 					className="modal"
 					onClick={() => {
-						this.handleClickCancel();
+						handleClickCancel();
 					}}
 				>
 					<div
@@ -69,7 +54,7 @@ class Modal extends React.Component {
 								role="button"
 								className="ui button"
 								onClick={(e) => {
-									this.handleClickCancel(e);
+									handleClickCancel(e);
 								}}
 							>
 								{cancelLabel ? cancelLabel : "CANCEL"}
@@ -78,7 +63,7 @@ class Modal extends React.Component {
 								role="button"
 								className="ui primary button"
 								onClick={(e) => {
-									this.handleClickOk(e);
+									handleClickOk(e);
 								}}
 							>
 								{okLabel ? okLabel : "OK"}
@@ -87,10 +72,11 @@ class Modal extends React.Component {
 					</div>
 				</div>
 			</AbstractModal>
-		) : null;
-
-		return <div>{modal}</div>;
+		);
 	}
-}
+
+	const modal = showModal ? renderModal() : null;
+	return <div>{modal}</div>;
+};
 
 export default Modal;
