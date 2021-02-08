@@ -2,26 +2,20 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import deleteStreamAction from "../redux/compose/deleteStreamAction";
-import history from "../history";
 const byIdDesc = (a, b) => b.id - a.id;
 
 const StreamList = ({ dispatch, streams, currentUserId }) => {
-	const handleDeleteStream = (streamId) => {
-		history.push(`/streams/delete/${streamId}`);
-	};
-
 	const renderEditDelete = (streamId, ownerId) => {
 		if (currentUserId === ownerId) {
 			return (
 				<React.Fragment>
-					<div
+					<Link
 						role="button"
+						to={`/streams/delete/${streamId}`}
 						className="ui right floated basic blue button"
-						onClick={() => handleDeleteStream(streamId)}
 					>
 						X
-					</div>
+					</Link>
 					<Link
 						role="button"
 						to={`/streams/edit/${streamId}`}

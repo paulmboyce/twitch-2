@@ -37,10 +37,8 @@ describe("Test component <StreamDelete> with state", () => {
 	beforeEach(() => {
 		render(<div id="modal-root"></div>);
 
-		mockCallToGetStreamFromServer = jest.fn(function (params) {
-			console.log("mockCallToGetStreamFromServer called with: ", params);
-		});
-		mockThunkDispatcher = jest.fn(() => {});
+		mockCallToGetStreamFromServer = jest.fn();
+		mockThunkDispatcher = jest.fn();
 		TEST_STATE = {
 			streams: {
 				9999: {
@@ -156,22 +154,18 @@ describe("Test component <StreamDelete> with state", () => {
 
 	it("gets stream from server if not in state", async () => {
 		//ARR
-		const thisStreamIdDoesNotExist = "7777";
+		const doesNotExist = "7777";
 		render(
 			<Provider store={mockStore}>
 				<Router history={mockHistory}>
-					<StreamDelete
-						match={{ params: { streamId: thisStreamIdDoesNotExist } }}
-					/>
+					<StreamDelete match={{ params: { streamId: doesNotExist } }} />
 				</Router>
 			</Provider>
 		);
 
 		//ASS
 		await waitFor(() => {
-			expect(mockCallToGetStreamFromServer).toHaveBeenCalled();
+			expect(mockCallToGetStreamFromServer).toHaveBeenCalledWith("7777");
 		});
-		expect(mockCallToGetStreamFromServer).toHaveBeenCalledTimes(1);
-		expect(mockCallToGetStreamFromServer).toHaveBeenCalledWith("7777");
 	});
 });
