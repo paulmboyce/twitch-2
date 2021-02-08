@@ -53,10 +53,10 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 							<p style={{ color: "grey" }}> Created: {ownerId}</p> {desc}
 						</div>
 						<div className="extra">
-							<div className="ui green button">
+							<Link className="ui green button" to={`/streams/show/${id}`}>
 								Watch Now
 								<i className="right chevron icon"></i>
-							</div>
+							</Link>
 							{renderEditDelete(id, ownerId)}
 						</div>
 					</div>

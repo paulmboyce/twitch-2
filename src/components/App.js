@@ -29,7 +29,7 @@ const App = ({ dispatch }) => {
 					<Route path="/streams/new" component={StreamCreate} />
 					<Route path="/streams/edit/:streamId" component={StreamEdit} />
 					<Route path="/streams/delete/:streamId" component={StreamDelete} />
-					<Route path="/streams/show" component={StreamShow} />
+					<Route path="/streams/show/:streamId" component={StreamShow} />
 				</div>
 			</Router>
 		</div>
