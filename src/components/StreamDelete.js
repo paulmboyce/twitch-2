@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Modal from "./Modal";
 import deleteStreamAction from "../redux/compose/deleteStreamAction";
+import getStreamAction from "../redux/compose/getStreamAction";
 import history from "../history";
 
-const StreamDelete = ({ dispatch, match }) => {
+const StreamDelete = ({ dispatch, match, stream }) => {
+	const { streamId } = match.params;
+	useEffect(() => {
+		if (!stream) {
+			dispatch(getStreamAction(streamId));
+		}
+	}, []);
+
 	const onClickModalOk = () => {
-		const { streamId } = match.params;
 		dispatch(deleteStreamAction(streamId));
 		history.push("/");
 	};
@@ -15,6 +22,8 @@ const StreamDelete = ({ dispatch, match }) => {
 	const onClickModalCancel = () => {
 		history.push("/");
 	};
+
+	let message = "Want to delete stream" + (stream ? `: ${stream.title}?` : "?");
 	return (
 		<div>
 			<h1>StreamDelete</h1>
@@ -23,10 +32,13 @@ const StreamDelete = ({ dispatch, match }) => {
 				onClickCancel={onClickModalCancel}
 				okLabel="DELETE"
 				cancelLabel="NO"
-				title="Want to delete this stream?"
+				title={message}
 			/>
 		</div>
 	);
 };
 
-export default connect()(StreamDelete);
+const mapStateToProps = (state, { match }) => {
+	return { stream: state.streams[match.params.streamId] };
+};
+export default connect(mapStateToProps)(StreamDelete);
