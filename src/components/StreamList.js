@@ -47,13 +47,13 @@ const StreamList = ({ dispatch, streams, currentUserId }) => {
 					<div className="content">
 						<div className="header">
 							<i className="large middle aligned icon camera"></i>
-							{title}
+							<Link to={`/streams/${id}`}>{title}</Link>
 						</div>
 						<div className="description">
 							<p style={{ color: "grey" }}> Created: {ownerId}</p> {desc}
 						</div>
 						<div className="extra">
-							<Link className="ui green button" to={`/streams/show/${id}`}>
+							<Link className="ui green button" to={`/streams/${id}`}>
 								Watch Now
 								<i className="right chevron icon"></i>
 							</Link>

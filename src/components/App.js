@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Header from "../components/Header";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import StreamList from "../components/StreamList";
@@ -24,12 +24,13 @@ const App = ({ dispatch }) => {
 				<div>
 					<Header />
 					<ErrorHeader />
-
-					<Route path="/" exact component={StreamList} />
-					<Route path="/streams/new" component={StreamCreate} />
-					<Route path="/streams/edit/:streamId" component={StreamEdit} />
-					<Route path="/streams/delete/:streamId" component={StreamDelete} />
-					<Route path="/streams/show/:streamId" component={StreamShow} />
+					<Switch>
+						<Route path="/" exact component={StreamList} />
+						<Route path="/streams/new" exact component={StreamCreate} />
+						<Route path="/streams/:streamId" component={StreamShow} />
+						<Route path="/streams/edit/:streamId" component={StreamEdit} />
+						<Route path="/streams/delete/:streamId" component={StreamDelete} />
+					</Switch>
 				</div>
 			</Router>
 		</div>

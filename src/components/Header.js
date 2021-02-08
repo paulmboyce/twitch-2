@@ -9,12 +9,6 @@ const Header = () => {
 			<Link className="item " to="/">
 				Home
 			</Link>
-			<Link className="item" to="/streams/delete">
-				Delete a Stream
-			</Link>
-			<Link className="item" to="/streams/show">
-				Show Stream
-			</Link>
 			<div className="right menu">
 				<div className="ui item">
 					<GoogleAuthButton />

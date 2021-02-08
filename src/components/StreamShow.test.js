@@ -1,24 +1,23 @@
 //TEST LIBS
 import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
-
-//SUPPORT LIBS
-import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
-import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+
+//SUPPORT LIBS
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import { Router } from "react-router-dom";
 
 // TESTEE
 import StreamShow from "./StreamShow";
 
 const mockHistory = createBrowserHistory();
 
-let TEST_STATE;
-
 describe("Component: ShowStream", function () {
+	let TEST_STATE;
 	const mockCallToServer = jest.fn();
 
 	const mockserver = setupServer(

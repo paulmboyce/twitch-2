@@ -15,9 +15,8 @@ const StreamShow = ({ dispatch, stream, match }) => {
 
 	return (
 		<div>
-			<h1>StreamShow</h1>
-			<h2>{stream.title}</h2>
-			<h3>{stream.desc}</h3>
+			<h1>{stream.title}</h1>
+			<h2>{stream.desc}</h2>
 		</div>
 	);
 };
